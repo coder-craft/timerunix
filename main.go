@@ -58,16 +58,24 @@ func main() {
 				modifyTime := time.Now().AddDate(year, month, day)
 				modifyTime = modifyTime.Add(time.Hour*time.Duration(hour) + time.Minute*time.Duration(mini) +
 					time.Second*time.Duration(sec))
-				exec.Command("date", "-s", modifyTime.Format("01/02/2006 15:04:05.999999999"))
-				fmt.Print("Set system time to:")
-				fmt.Println(modifyTime.String())
+				err := exec.Command("date", "-s", modifyTime.Format("01/02/2006 15:04:05.999999999")).Run()
+				if err != nil {
+					fmt.Println(err)
+				} else {
+					fmt.Print("Set system time to:")
+					fmt.Println(modifyTime.String())
+				}
 			}
 		case "d":
 			{
 				modifyTime := time.Now().Add(time.Second * time.Duration(*tsSecond))
-				exec.Command("date", "-s", modifyTime.Format("01/02/2006 15:04:05.999999999"))
-				fmt.Print("Set system time to:")
-				fmt.Println(modifyTime.String())
+				err := exec.Command("date", "-s", modifyTime.Format("01/02/2006 15:04:05.999999999")).Run()
+				if err != nil {
+					fmt.Println(err)
+				} else {
+					fmt.Print("Set system time to:")
+					fmt.Println(modifyTime.String())
+				}
 			}
 		}
 	})
